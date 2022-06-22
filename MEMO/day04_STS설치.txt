@@ -1,0 +1,12 @@
+환경잡기
+	
+STS 설치
+	구글 sts검색 > Tools-Spring클릭 > 페이지 하단 "looking for Spring Tool Suite3 부분
+	Spring Tool Suite 3 wiki 클릭 >> Spring Tool Suit 3.9.18 부분 첫번째 다운로드 링크
+
+STS설정
+	기존 서버 삭제 > 톰캣 9.0 emdfhr
+	인코딩 UTF-8 설정
+	Run/Debug/Console. 설정에서 Limit Console output 체크 해제
+
+프로젝트 생성 > 다음시간

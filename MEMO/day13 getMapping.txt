@@ -1,0 +1,35 @@
+	/* 이렇게 직접 부르지 않음
+	@GetMapping("/ex01")
+	public void ex01(String name, int age) {
+		log.info("ex01...."+name+","+age);
+	}
+	 * 
+	 */
+	@GetMapping("/ex01")
+	public void ex01(InfoDTO infoDTO) { 
+		/*
+		 * 외부에서 전달된 파라미터를 매개변수 필드명과 자동으로 매핑한다.
+		 * 이제 객체로 받고 자동으로 mapping되는 것을 익숙해져야함
+		 */
+		log.info("ex01...."+infoDTO.getName()+","+infoDTO.getAge());
+	}
+	
+	@GetMapping("/ex02")
+	/*
+	 * 외부에서 전달된 파라미터의 이름과 매개변수가 다를 경우 @RequestParam을 사용하여 어디로 전달받을 지 알려준다.
+	 */
+	public void ex02(@RequestParam("data1") String name,@RequestParam("data2")int age) {
+		log.info("ex02......."+name+" "+age);
+	}
+	
+	/*
+	 * 외부에서 전달된 파라미터를 여러개 받을 때 @RequestParam과 List형태로 전달받기
+	 */
+	@GetMapping("/ex03")
+	public String ex03(@RequestParam("data") ArrayList<String> datas) {
+		log.info("datas : "+datas);
+		return "ex03";
+	}
+
+
+>>> requestMapping, getMapping으로 파라미터 받기

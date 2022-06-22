@@ -1,0 +1,68 @@
+해당 프로젝트의 404, 405, 500과 같은 에러를 처리할 때
+
+1. web.xml에서 해당 에러가 뜰 경우 location을 지정
+	<error-page>
+		<error-code>404</error-code>
+		<location>/error</location>
+	</error-page>
+	<error-page>
+		<error-code>405</error-code>
+		<location>/error</location>
+	</error-page>
+	<error-page>
+		<error-code>500</error-code>
+		<location>/error</location>
+	</error-page>
+
+** 여기서 error처리는 실행 경로가 어디이던간에 무조건 해당 에러가 뜨면
+내가 지정한 페이지로 보낸다.
+
+만약 특정 페이지에서의 에러만 막고 싶다면
+web.xml의 servlet 구역에서 
+	<init-param>
+		<param-name>throwExceptionIfNoHandlerFound</param-name>
+		<param-value>true</param-value>
+	</init-param>
+설정을 해주면 된다.
+
+** 에러 페이지 표시 컨트롤러 설정
+@Controller
+public class CustomError {
+	@GetMapping("/error")
+	public String goErrorPage(HttpServletRequest request) {
+		Object status=request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
+		if(status!=null) {
+			int statusCode=Integer.valueOf(status.toString());
+			if(statusCode==HttpStatus.NOT_FOUND.value()) {
+				return "error/404";
+			}
+		}
+		return "error/500";		
+	}
+}
+
+views에 error폴더를 만들고, 거기에 해당 에러에 해당하는 404/500.jsp를 만들어 놓는다
+
+하나의 에러에 해당하는 페이지를 만들고 싶다면
+
+@ControllerAdvice
+@Log4j
+public class CommonExceptionAdvice {
+	
+	/*
+	 * @ExceptionHandler(Exception.class) //어떤 예외가 발생했을때 밑의 메소드를 실행할래? 
+	public String
+	 * except(Exception e, Model model) {
+	 * log.error("Exception............"+e.getMessage());
+	 * model.addAttribute("exception", e); log.error(model.toString()); return
+	 * "error/500"; }
+	 * 
+	 * @ExceptionHandler(NoHandlerFoundException.class)
+	 * 
+	 * @ResponseStatus(HttpStatus.NOT_FOUND) public String
+	 * except404(NoHandlerFoundException e) { return "error/404"; }
+	 */
+}
+
+이런식으로 주면 된다.
+

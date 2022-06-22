@@ -1,0 +1,10 @@
+model 2 방식
+
+a.jsp --> web.xml ------------------> Front-Controller.java------------------------------------->c.jsp
+요청 --> (서블렛이 했던 역할)	1Controller->1Service 구현
+(url)	어떤 Controller로 보낼지	>> 기능별로 controller 구현 (세분화)
+	결정			>> 요청한 url에 맞는 기능의 controller로 분배
+	(url 분석)			F-C.java>Controller.java > DAO.java >DB
+					<	     <	         <돌아감
+				>> F-C.java에서 c.jsp로 이동
+
