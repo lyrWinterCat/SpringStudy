@@ -42,13 +42,26 @@ public class BoardMapperTests {
 	
 	@Test
 	public void deleteTest() {
-		Long bno=5L;
+		Long bno=2L;
+		BoardVO boardVO = boardMapper.read(bno);
 		if(boardMapper.read(bno)!=null) {
-			log.info("Delete Count : "+boardMapper.delete(bno));
+			log.info("Delete Count : "+boardMapper.delete(boardVO.getBno()));
 			return;
 		}
 		log.info("No Board");
 	}
+	
+//	@Test
+//	public void updateTest() {
+//		BoardVO boardVO = boardMapper.read(1L);
+//		if(boardVO!=null) {
+//			boardVO.setTitle("수정된 제목");
+//			boardVO.setContent("수정된 내용");
+//			boardVO.setWriter("user1010");
+//			log.info("update count: "+boardMapper.update(boardVO));
+//		}
+//		log.info("NO BOARD");
+//	}
 	
 	
 }

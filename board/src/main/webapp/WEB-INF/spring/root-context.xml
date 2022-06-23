@@ -21,12 +21,17 @@
 	</bean>
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"></property>
+		
+		<!-- mapper스캔이 xml을 인식할 수 있도록 설정을 해주어야 한다. -->
 		<property name="mapperLocations" value="classpath:mappers/**/*Mapper.xml"/>
 		<property name="configLocation" value="classpath:config/config.xml"/>
 	</bean>
 	
 	<context:component-scan base-package="com.example.board.exception"/>
+	<context:component-scan base-package="com.example.board.service"/>
 		
+	<!-- mapper스캔 / mapper 인터페이스의 경로를 써주면, 해당 mapper의 클래스 자동 주입(DAO 불필요)
+	mapper 인터페이스에서 정의한 내용을 스프링에서 xml과 연결, dao 없이 컨트롤러에서 사용 가능 -->
 	<mybatis-spring:scan base-package="com.example.board.mapper"/>
 		
 </beans>
