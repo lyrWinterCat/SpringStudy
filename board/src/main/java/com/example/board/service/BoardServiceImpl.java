@@ -5,38 +5,40 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.board.domain.dao.BoardDAO;
 import com.example.board.domain.vo.BoardVO;
+import com.example.board.domain.vo.Criteria;
 import com.example.board.mapper.BoardMapper;
 
 @Service
 public class BoardServiceImpl implements BoardService {
 
 	@Autowired
-	private BoardMapper boardMapper;
+	BoardDAO boardDAO;
 	
 	@Override
 	public void register(BoardVO board) {
-		boardMapper.insert(board);
+		boardDAO.register(board);
 	}
 
 	@Override
 	public BoardVO get(Long bno) {		
-		return boardMapper.read(bno);
+		return boardDAO.get(bno);
 	}
 
 	@Override
 	public boolean modify(BoardVO board) {
-		return boardMapper.update(board) !=0;
+		return boardDAO.modify(board);
 	}
 
 	@Override
 	public boolean remove(Long bno) {
-		return boardMapper.delete(bno) !=0;
+		return boardDAO.remove(bno);
 	}
 
 	@Override
-	public List<BoardVO> getList() {
-		return boardMapper.getList();
+	public List<BoardVO> getList(Criteria criteria) {
+		return boardDAO.getList(criteria);
 	}
 
 }

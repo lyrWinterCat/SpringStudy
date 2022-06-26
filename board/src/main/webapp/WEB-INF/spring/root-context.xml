@@ -29,6 +29,7 @@
 	
 	<context:component-scan base-package="com.example.board.exception"/>
 	<context:component-scan base-package="com.example.board.service"/>
+	<context:component-scan base-package="com.example.board.domain.dao"/>
 		
 	<!-- mapper스캔 / mapper 인터페이스의 경로를 써주면, 해당 mapper의 클래스 자동 주입(DAO 불필요)
 	mapper 인터페이스에서 정의한 내용을 스프링에서 xml과 연결, dao 없이 컨트롤러에서 사용 가능 -->

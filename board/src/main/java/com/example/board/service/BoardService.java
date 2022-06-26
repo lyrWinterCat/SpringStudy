@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.example.board.domain.vo.BoardVO;
+import com.example.board.domain.vo.Criteria;
 
 @Service
 public interface BoardService {
@@ -21,6 +22,6 @@ public interface BoardService {
 	public boolean remove(Long bno);
 	
 	// 전체 게시글 가져오기
-	public List<BoardVO> getList();	
+	public List<BoardVO> getList(Criteria criteria);	
 	
 }

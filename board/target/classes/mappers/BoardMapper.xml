@@ -3,7 +3,16 @@
 <mapper namespace="com.example.board.mapper.BoardMapper">
 
 	<select id="getList" resultType="boardVO">
-		SELECT BNO, TITLE, CONTENT, WRITER, REGDATE, UPDATEDATE FROM TBL_BOARD ORDER BY BNO
+	<![CDATA[
+		SELECT BNO,TITLE,CONTENT,WRITER,REGDATE,UPDATEDATE
+		FROM
+		(	
+			SELECT /*+ INDEX_DESC(TBL_BOARD, SYS_C007115) */
+			ROWNUM RN,BNO, TITLE, CONTENT, WRITER, REGDATE, UPDATEDATE
+			FROM TBL_BOARD WHERE ROWNUM <= #{pageNum}*#{amount}
+		)
+		WHERE RN > (#{pageNum}-1)* #{amount}
+	]]>
 	</select>
 	
 	

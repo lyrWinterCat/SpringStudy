@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.example.board.domain.vo.BoardVO;
+import com.example.board.domain.vo.Criteria;
 import com.example.board.service.BoardService;
 
 import lombok.extern.log4j.Log4j;
@@ -18,6 +18,8 @@ public class BoardServiceTests {
 	
 	@Autowired
 	private BoardService boardService;
+	
+
 	
 	@Test
 	public void serviceTest() {
@@ -38,6 +40,7 @@ public class BoardServiceTests {
 	}
 	 * 
 	 */
+
 	/*
 	@Test
 	public void getTest() {
@@ -50,9 +53,10 @@ public class BoardServiceTests {
 	}
 	 * 
 	 */
+
 	
 	/*
-	@Test
+	@Before
 	public void modifyTest() {
 		BoardVO boardVO = boardService.get(1L);
 		if(boardVO==null) {log.info("no board"); return;}
@@ -69,9 +73,9 @@ public class BoardServiceTests {
 	 */
 	
 	/*
-	@Test
+	@Before
 	public void removeTest() {
-		BoardVO boardVO = boardService.get(22L);
+		BoardVO boardVO = boardService.get(21L);
 		if(boardVO==null) {log.info("no board"); return;}
 		
 		if(boardService.remove(boardVO.getBno())) {
@@ -84,7 +88,7 @@ public class BoardServiceTests {
 	 */
 	@Test
 	public void getListTest() {
-		boardService.getList().forEach(log::info);
+		boardService.getList(new Criteria()).forEach(log::info);
 	}
 
 }
