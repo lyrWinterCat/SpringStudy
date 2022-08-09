@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	<!-- 스프링에서 객체를 생성해 주는 영역 -->
+
+	<!-- 기존의 방식 : 기본생성자를 통해 만들기
+	PersonVO p1 = new PersonVO() 
+	* property name은 table의 컬럼명/PersonVO의 변수명과 일치해야함
+	-->
+	<bean id="p1" class="vo.PersonVO">
+		<property name="name" value="삼길동"/>
+		<property name="age" value="30"/>
+		<property name="tel" value="010-333-3333"/>
+	</bean>
+	<!-- 이와 같은 방식을 setter injection이라고 한다. -->
+	
+	<!-- 생성자 오버로딩을 통한 객체 생성  : 생성자에 파라미터 담아서 생성
+	* 파라미터 순서를 맞춰서 넣어주어야 함! name은 쓰지 않음 (어차피 순서를 맞춰서 넣기 때문에)
+	PersonVO p2 = new PersonVO("사길동",40,"010-444-4444"); -->
+	<bean id="p2" class="vo.PersonVO">
+		<constructor-arg value="사길동" />
+		<constructor-arg value="40" />
+		<constructor-arg value="010-444-4444" />	
+		
+		<!-- index를 사용하면 순서를 바꿔도 상관 없음. 그러나 번거로워서 잘 쓰지 않음
+		<constructor-arg value="사길동" />
+		<constructor-arg value="010-444-4444" index="3"/>
+		<constructor-arg value="40" index="2"/>
+		  -->
+	</bean>
+	<!-- 이와 같은 방법을 생성자(constructor) injection이라고 한다. -->
+	
+	
+	
+		
+</beans>
